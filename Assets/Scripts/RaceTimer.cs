@@ -29,7 +29,7 @@ public class RaceTimer : MonoBehaviour
         int seconds = Mathf.FloorToInt(timer % 60);
         int milliseconds = Mathf.FloorToInt((timer * 100) % 100);
 
-        timerText.text = $"Timer: {minutes:00}:{seconds:00}:{milliseconds:00}";
+        timerText.text = $"Time: {minutes:00}:{seconds:00}:{milliseconds:00}";
     }
 
     public void StartTimer()
