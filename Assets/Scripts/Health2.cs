@@ -10,8 +10,8 @@ public class Health2 : MonoBehaviour
     private bool isGameOver = false; // Add this to track game over state
 
     // Health bar position and size
-    private Vector2 healthBarPosition = new Vector2(20, 20);
-    private Vector2 healthBarSize = new Vector2(400, 20);
+    //private Vector2 healthBarPosition = new Vector2(20, 20);
+    //private Vector2 healthBarSize = new Vector2(400, 20);
 
     // Restart button position and size
     private Vector2 restartButtonPosition;
@@ -112,12 +112,12 @@ public class Health2 : MonoBehaviour
         }
 
         // Background bar (gray for health)
-        GUI.color = Color.gray;
-        GUI.Box(new Rect(healthBarPosition.x, healthBarPosition.y, healthBarSize.x, healthBarSize.y), "");
+        //GUI.color = Color.gray;
+        //GUI.Box(new Rect(healthBarPosition.x, healthBarPosition.y, healthBarSize.x, healthBarSize.y), "");
 
         // Health bar fill (green for full health)
-        GUI.color = Color.green;
-        GUI.Box(new Rect(healthBarPosition.x, healthBarPosition.y, (health / (float)maxHealth) * healthBarSize.x, healthBarSize.y), "");
+        //GUI.color = Color.green;
+        //GUI.Box(new Rect(healthBarPosition.x, healthBarPosition.y, (health / (float)maxHealth) * healthBarSize.x, healthBarSize.y), "");
 
         // Show game over GUI if the game is over
         if (isGameOver)
