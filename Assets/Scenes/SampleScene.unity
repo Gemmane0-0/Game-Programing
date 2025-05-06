@@ -30915,7 +30915,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dc8469baf33beb4abf36fcce9309e8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _particles: {fileID: 0}
   speed: 0.5
+  boostSpeed: 3
+  boostDuration: 2
+  boostCooldown: 5
+  boostParticles: {fileID: 0}
 --- !u!143 &1345962707
 CharacterController:
   m_ObjectHideFlags: 0
@@ -30986,7 +30991,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 0.5
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
