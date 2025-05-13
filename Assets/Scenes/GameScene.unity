@@ -30899,6 +30899,7 @@ GameObject:
   - component: {fileID: 1345962713}
   - component: {fileID: 1345962714}
   - component: {fileID: 1345962715}
+  - component: {fileID: 1345962716}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -31287,6 +31288,19 @@ MonoBehaviour:
   - {fileID: 6287319582821184461, guid: 77653068d1cd5254c82b4e0048353235, type: 3}
   - {fileID: 5686074402418921634, guid: 3c5b9150bbe75ad458fb7e4b20dc7b79, type: 3}
   - {fileID: 1894404873762196831, guid: ae918a24f13c5784ea89fc59b6e39038, type: 3}
+--- !u!65 &1345962716
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1345962700}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 2, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1348001442
 PrefabInstance:
   m_ObjectHideFlags: 0
