@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.022667425, g: 0.032639515, b: 0.113426775, a: 1}
+  m_IndirectSpecularColor: {r: 0.022784244, g: 0.032759726, b: 0.11342741, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -31047,6 +31047,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d76dec4d234e8a84789e8337a3dd9637, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageSound: {fileID: 8300000, guid: 2f82093f2fd21df46bd4d02cba002823, type: 3}
+  deathSound: {fileID: 8300000, guid: db7424409e958804d895eb2615a513b9, type: 3}
 --- !u!82 &1345962711
 AudioSource:
   m_ObjectHideFlags: 0
