@@ -30987,7 +30987,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _particles: {fileID: 0}
   speed: 0.5
-  boostSpeed: 3
+  boostSpeed: 1.5
   boostDuration: 2
   boostCooldown: 5
   boostParticles: {fileID: 0}
