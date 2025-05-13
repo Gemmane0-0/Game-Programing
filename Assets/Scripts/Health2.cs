@@ -16,6 +16,7 @@ public class Health2 : MonoBehaviour
     // Restart button position and size
     private Vector2 restartButtonPosition;
     private Vector2 restartButtonSize = new Vector2(120, 40);
+    private bool isCursorLocked = false;
 
     void Start()
     {
@@ -24,28 +25,53 @@ public class Health2 : MonoBehaviour
         // Position the restart button in the top-right corner with some padding
         restartButtonPosition = new Vector2(Screen.width - restartButtonSize.x - 20, 20);
         
-        // Initially lock cursor for gameplay
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        // Initially unlock cursor in game scene
+        if (SceneManager.GetActiveScene().name == "GameScene")
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            isCursorLocked = false;
+        }
     }
 
     void Update()
     {
-        // Show cursor when hovering over UI areas
-        bool isOverRestartButton = Input.mousePosition.x >= restartButtonPosition.x &&
-                                 Input.mousePosition.x <= restartButtonPosition.x + restartButtonSize.x &&
-                                 Input.mousePosition.y >= Screen.height - restartButtonPosition.y - restartButtonSize.y &&
-                                 Input.mousePosition.y <= Screen.height - restartButtonPosition.y;
+        if (SceneManager.GetActiveScene().name == "GameScene" && !isGameOver)
+        {
+            // Check if player clicked in the center of the screen
+            if (Input.GetMouseButtonDown(0))
+            {
+                // Calculate center area (e.g., middle 20% of screen)
+                float centerWidth = Screen.width * 0.2f;
+                float centerHeight = Screen.height * 0.2f;
+                float centerX = Screen.width / 2 - centerWidth / 2;
+                float centerY = Screen.height / 2 - centerHeight / 2;
 
-        if (isOverRestartButton || isGameOver)
-        {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-        }
-        else if (!isGameOver)
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
+                // Check if click is in center area
+                if (Input.mousePosition.x >= centerX && 
+                    Input.mousePosition.x <= centerX + centerWidth &&
+                    Input.mousePosition.y >= centerY && 
+                    Input.mousePosition.y <= centerY + centerHeight)
+                {
+                    isCursorLocked = !isCursorLocked;
+                    Cursor.lockState = isCursorLocked ? CursorLockMode.Locked : CursorLockMode.None;
+                    Cursor.visible = !isCursorLocked;
+                }
+            }
+
+            // Check if cursor is over UI elements
+            bool isOverRestartButton = Input.mousePosition.x >= restartButtonPosition.x &&
+                                     Input.mousePosition.x <= restartButtonPosition.x + restartButtonSize.x &&
+                                     Input.mousePosition.y >= Screen.height - restartButtonPosition.y - restartButtonSize.y &&
+                                     Input.mousePosition.y <= Screen.height - restartButtonPosition.y;
+
+            // Unlock cursor when over UI
+            if (isOverRestartButton)
+            {
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+                isCursorLocked = false;
+            }
         }
     }
 
@@ -142,12 +168,12 @@ public class Health2 : MonoBehaviour
     // New method to handle restarting the game
     private void RestartGame()
     {
-        // Reset time scale before restarting
         Time.timeScale = 1f;
-        // Reset cursor state
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-        // Reload the current scene
+        isCursorLocked = false;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        
+        // Reload the current scene instead of going back to selection
         Scene currentScene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(currentScene.name);
     }
