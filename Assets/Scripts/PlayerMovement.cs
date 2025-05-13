@@ -1,17 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [Header("Movement Settings")]
     [SerializeField] private ParticleSystem _particles;
+    [Header("UI Elements")]
+    [SerializeField] private Image boostCooldownImage;
+    [SerializeField] private GameObject boostReadyIndicator;
+    [SerializeField] private Text cooldownText; // Optional text display
+    [SerializeField] private Animator boostUIAnimator; // Optional animations
 
     public float speed = 1.5f; //player speed
     public float boostSpeed = 3f; //speed during the boost
     public float boostDuration = 2f; // duration of speed boost
     public float boostCooldown = 5f; //cooldown of the boost after used
     public ParticleSystem boostParticles;
-
 
     private CharacterController charController;
     private bool isBoosting = false;
@@ -29,6 +35,25 @@ public class PlayerMovement : MonoBehaviour
             boostParticles.Stop();
         }
 
+        InitializeUI();
+    }
+
+    void InitializeUI()
+    {
+        if (boostCooldownImage != null)
+        {
+            boostCooldownImage.fillAmount = 1;
+        }
+
+        if (boostReadyIndicator != null)
+        {
+            boostReadyIndicator.SetActive(true);
+        }
+
+        if (cooldownText != null)
+        {
+            cooldownText.gameObject.SetActive(false);
+        }
     }
 
     // Update is called once per frame
@@ -36,6 +61,7 @@ public class PlayerMovement : MonoBehaviour
 
         HandleMovement();
         HandleBoost();
+        UpdateBoostUI();
     }
 
     void HandleMovement() {
@@ -92,4 +118,65 @@ public class PlayerMovement : MonoBehaviour
             boostParticles.Stop();
         }
     }
+
+    void UpdateBoostUI()
+    {
+        if (Time.time < nextBoostTime)
+        {
+            // Boost on cooldown
+            float remainingCooldown = nextBoostTime - Time.time;
+            float cooldownProgress = 1 - (remainingCooldown / boostCooldown);
+
+            if (boostCooldownImage != null)
+            {
+                boostCooldownImage.fillAmount = cooldownProgress;
+            }
+
+            if (boostReadyIndicator != null)
+            {
+                boostReadyIndicator.SetActive(false);
+            }
+
+            if (cooldownText != null)
+            {
+                cooldownText.gameObject.SetActive(true);
+                cooldownText.text = Mathf.Ceil(remainingCooldown).ToString();
+            }
+        }
+        else
+        {
+            // Boost ready
+            if (boostCooldownImage != null)
+            {
+                boostCooldownImage.fillAmount = 1;
+            }
+
+            if (boostReadyIndicator != null)
+            {
+                boostReadyIndicator.SetActive(true);
+            }
+
+            if (cooldownText != null)
+            {
+                cooldownText.gameObject.SetActive(false);
+            }
+
+            // Optional: Pulse effect when ready
+            if (!isBoosting && boostUIAnimator != null)
+            {
+                boostUIAnimator.SetBool("Ready", true);
+            }
+        }
+
+        // Optional: Different visual during active boost
+        if (isBoosting && boostUIAnimator != null)
+        {
+            boostUIAnimator.SetBool("Boosting", true);
+        }
+        else if (boostUIAnimator != null)
+        {
+            boostUIAnimator.SetBool("Boosting", false);
+        }
+    }
+
 }
