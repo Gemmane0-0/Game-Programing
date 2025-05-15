@@ -5,3 +5,5 @@ Group Members: Andres Rivera was responsible for the UI, car selection, and paus
 Attributions: We used some from the unity asset store, and some sound effects that we recording for the hit sound.
 
 we made the game in the version of: Unity 2021.3.36f1
+
+NOTE: we used the branch "fake_main" to run our game, we came across an error with the default main for some reason.
